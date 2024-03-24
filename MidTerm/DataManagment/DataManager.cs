@@ -52,10 +52,6 @@ public class DataManager
                             }
                         }
                     }
-                    else 
-                    {
-                        throw new FileNotFoundException();
-                    }
                 }
                 catch (IsolatedStorageException e)
                 {

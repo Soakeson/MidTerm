@@ -13,3 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin images/player.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:images/player.png

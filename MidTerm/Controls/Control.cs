@@ -12,12 +12,15 @@ namespace Yew
         public SceneContext sceneContext { get; private set; }
         [DataMember()]
         public Keys key { get; set; }
+        [DataMember()]
+        public bool keyPressOnly { get; set; }
 
-        public Control(SceneContext sc, ControlContext cc, Keys key)
+        public Control(SceneContext sc, ControlContext cc, Keys key, bool keyPressOnly)
         {
             this.sceneContext = sc;
             this.controlContext = cc;
             this.key = key;
+            this.keyPressOnly = keyPressOnly;
         }
     }
 }

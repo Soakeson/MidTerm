@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using CS5410.Input;
 
 namespace Yew
 {
@@ -9,25 +8,10 @@ namespace Yew
     {
         private Dictionary<SceneContext, Dictionary<ControlContext, Control>> controls {get; set;} =
             new Dictionary<SceneContext, Dictionary<ControlContext, Control>>();
-        private Dictionary<Keys, CommandEntry> delegates {get; set;} =
-            new Dictionary<Keys, CommandEntry>();
+        private Dictionary<Keys, IInputDevice.CommandDelegate> delegates {get; set;} =
+            new Dictionary<Keys, IInputDevice.CommandDelegate>();
         private DataManager dataManager;
         private KeyboardState statePrevious;
-
-        /// <summary>
-        /// Used to keep track of the details associated with a command
-        /// </summary>
-        private struct CommandEntry
-        {
-            public CommandEntry(bool keyPressOnly, IInputDevice.CommandDelegate callback)
-            {
-                this.keyPressOnly = keyPressOnly;
-                this.callback = callback;
-            }
-
-            public bool keyPressOnly;
-            public IInputDevice.CommandDelegate callback;
-        }
 
         public ControlManager(DataManager dm) 
         {
@@ -41,11 +25,12 @@ namespace Yew
             // If the control hasn't been loaded register it
             if (!controls[sc].ContainsKey(cc))
             {
-                controls[sc].Add(cc, new Control(sc, cc, key));
+                controls[sc].Add(cc, new Control(sc, cc, key, keyPressOnly));
             }
+            // Loaded control will override the register so it will only be defaulted if it wasn't able to load
             Control con = controls[sc][cc];
-            // Loaded control will override the register so it will only be registered if it wasn't able to load
-            delegates.Add(con.key, new CommandEntry(keyPressOnly, d));
+            delegates.Add(con.key, d);
+            SaveKeys();
         }
 
         private void RegisterScene(SceneContext sc)
@@ -64,7 +49,7 @@ namespace Yew
         {
             Keys old = controls[sc][cc].key;
             controls[sc][cc].key = key;
-            CommandEntry ce = delegates[old];
+            IInputDevice.CommandDelegate ce = delegates[old];
             delegates.Remove(key);
             delegates.Add(key, ce);
             SaveKeys();
@@ -84,6 +69,31 @@ namespace Yew
         private void SaveKeys()
         {
             dataManager.Save<Dictionary<SceneContext, Dictionary<ControlContext, Control>>>(controls);
+        }
+
+        /// <summary>
+        /// Goes through all the registered commands and invokes the callbacks if they
+        /// are active.
+        /// </summary>
+        public void Update(GameTime gameTime, SceneContext sc)
+        {
+            Dictionary<ControlContext, Control> sceneControls = controls[sc];
+            KeyboardState state = Keyboard.GetState();
+            foreach (Control control in sceneControls.Values)
+            {
+                if (control.keyPressOnly && KeyPressed(control.key))
+                {
+                    delegates[control.key](gameTime, 1.0f);
+                }
+                else if (!control.keyPressOnly && state.IsKeyDown(control.key))
+                {
+                    delegates[control.key](gameTime, 1.0f);
+                }
+            }
+
+            //
+            // Move the current state to the previous state for the next time around
+            statePrevious = state;
         }
 
         /// <summary>

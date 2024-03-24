@@ -1,7 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using CS5410.Input;
 
 namespace Yew
 {
@@ -12,15 +11,14 @@ namespace Yew
         protected GraphicsDeviceManager graphics;
         protected int screenWidth;
         protected int screenHeight;
-        protected KeyboardInput keyboard = new KeyboardInput();
 
         public void Initialize(GraphicsDevice graphicsDevice, GraphicsDeviceManager graphics)
         {
-            graphics = graphics;
-            screenWidth = graphics.PreferredBackBufferWidth;
-            screenHeight = graphics.PreferredBackBufferHeight;
-            graphicsDevice = graphicsDevice;
-            spriteBatch = new SpriteBatch(graphicsDevice);
+            this.graphics = graphics;
+            this.screenWidth = graphics.PreferredBackBufferWidth;
+            this.screenHeight = graphics.PreferredBackBufferHeight;
+            this.graphicsDevice = graphicsDevice;
+            this.spriteBatch = new SpriteBatch(graphicsDevice);
         }
 
         public abstract void LoadContent(ContentManager contentManager);
