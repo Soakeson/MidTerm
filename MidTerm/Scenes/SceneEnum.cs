@@ -1,6 +1,6 @@
 using System;
 
-namespace Yew
+namespace Scenes
 {
     [Flags]
     public enum SceneContext 
