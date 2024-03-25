@@ -4,12 +4,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Yew
 {
+    public delegate void ControlDelegate(GameTime gameTime, float value);
+    public delegate void ControlDelegatePosition(GameTime GameTime, int x, int y);
+
     public class ControlManager
     {
         private Dictionary<SceneContext, Dictionary<ControlContext, Control>> controls {get; set;} =
             new Dictionary<SceneContext, Dictionary<ControlContext, Control>>();
-        private Dictionary<Keys, IInputDevice.CommandDelegate> delegates {get; set;} =
-            new Dictionary<Keys, IInputDevice.CommandDelegate>();
+        private Dictionary<Keys, ControlDelegate> delegates {get; set;} =
+            new Dictionary<Keys, ControlDelegate>();
         private DataManager dataManager;
         private KeyboardState statePrevious;
 
@@ -19,7 +22,7 @@ namespace Yew
             controls = dm.Load<Dictionary<SceneContext, Dictionary<ControlContext, Control>>>(controls);
         }
 
-        public void RegisterControl(SceneContext sc, ControlContext cc, Keys key, bool keyPressOnly, IInputDevice.CommandDelegate d)
+        public void RegisterControl(SceneContext sc, ControlContext cc, Keys key, bool keyPressOnly, ControlDelegate d)
         {
             RegisterScene(sc);
             // If the control hasn't been loaded register it
@@ -30,7 +33,6 @@ namespace Yew
             // Loaded control will override the register so it will only be defaulted if it wasn't able to load
             Control con = controls[sc][cc];
             delegates.Add(con.key, d);
-            SaveKeys();
         }
 
         private void RegisterScene(SceneContext sc)
@@ -49,7 +51,7 @@ namespace Yew
         {
             Keys old = controls[sc][cc].key;
             controls[sc][cc].key = key;
-            IInputDevice.CommandDelegate ce = delegates[old];
+            ControlDelegate ce = delegates[old];
             delegates.Remove(key);
             delegates.Add(key, ce);
             SaveKeys();
@@ -66,7 +68,7 @@ namespace Yew
         /// <summary>
         /// Saves the registered controls to file.
         /// <summary>
-        private void SaveKeys()
+        public void SaveKeys()
         {
             dataManager.Save<Dictionary<SceneContext, Dictionary<ControlContext, Control>>>(controls);
         }

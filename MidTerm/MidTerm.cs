@@ -26,11 +26,12 @@ namespace Yew
             y = 0;
 
             controls.RegisterControl(SceneContext.MainMenu, ControlContext.MoveUp, Keys.Up, true,
-                    new IInputDevice.CommandDelegate((GameTime gameTime, float value) => { 
+                    new ControlDelegate((GameTime gameTime, float value) => { 
                         this.y -= 5;
                         }));
+
             controls.RegisterControl(SceneContext.MainMenu, ControlContext.MoveDown, Keys.Down, true,
-                    new IInputDevice.CommandDelegate((GameTime gameTime, float value) => { 
+                    new ControlDelegate((GameTime gameTime, float value) => { 
                         this.y += 5;
                         }));
         }
