@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Controls;
+using Scenes;
 
 namespace Yew 
 {
@@ -10,10 +12,9 @@ namespace Yew
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private DataManager dataManager;
-        private ControlManager controls;
-        private Texture2D playerTexture;
-        private int x;
-        private int y;
+        private ControlManager controlManager;
+        private ControlManager contentManager;
+        private GameScene gameView;
 
         public MidTerm()
         {
@@ -21,32 +22,19 @@ namespace Yew
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             dataManager = new DataManager();
-            controls = new ControlManager(dataManager);
-            x = 0;
-            y = 0;
-
-            controls.RegisterControl(SceneContext.MainMenu, ControlContext.MoveUp, Keys.Up, true,
-                    new ControlDelegate((GameTime gameTime, float value) => { 
-                        this.y -= 5;
-                        }));
-
-            controls.RegisterControl(SceneContext.MainMenu, ControlContext.MoveDown, Keys.Down, true,
-                    new ControlDelegate((GameTime gameTime, float value) => { 
-                        this.y += 5;
-                        }));
+            controlManager = new ControlManager(dataManager);
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            gameView = new GameScene(graphics.GraphicsDevice, graphics, controlManager);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            playerTexture = this.Content.Load<Texture2D>("images/player");
+            gameView.LoadContent(this.Content);
         }
 
         protected override void Update(GameTime gameTime)
@@ -56,7 +44,7 @@ namespace Yew
                 Exit();
             }
 
-            controls.Update(gameTime, SceneContext.MainMenu);
+            gameView.Update(gameTime);
 
 
             // TODO: Add your update logic here
@@ -66,18 +54,7 @@ namespace Yew
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            spriteBatch.Begin();
-            spriteBatch.Draw(
-                playerTexture, new Rectangle(
-                x,
-                y,
-                playerTexture.Width,
-                playerTexture.Height),
-                Color.Red);
-            spriteBatch.End();
-            // TODO: Add your drawing code here
+            gameView.Render(gameTime);
 
             base.Draw(gameTime);
         }

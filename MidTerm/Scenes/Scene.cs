@@ -11,14 +11,16 @@ namespace Scenes
         protected GraphicsDeviceManager graphics;
         protected int screenWidth;
         protected int screenHeight;
+        protected Controls.ControlManager controlManager;
 
-        public void Initialize(GraphicsDevice graphicsDevice, GraphicsDeviceManager graphics)
+        public void Initialize(GraphicsDevice graphicsDevice, GraphicsDeviceManager graphics, Controls.ControlManager controlManager)
         {
             this.graphics = graphics;
             this.screenWidth = graphics.PreferredBackBufferWidth;
             this.screenHeight = graphics.PreferredBackBufferHeight;
             this.graphicsDevice = graphicsDevice;
             this.spriteBatch = new SpriteBatch(graphicsDevice);
+            this.controlManager = controlManager;
         }
 
         public abstract void LoadContent(ContentManager contentManager);

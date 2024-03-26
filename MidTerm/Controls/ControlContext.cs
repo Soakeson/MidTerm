@@ -1,6 +1,6 @@
 using System;
 
-namespace Yew
+namespace Controls
 {
     [Flags]
     public enum ControlContext 

@@ -7,9 +7,9 @@ namespace Scenes
     public class ScoreScene : Scene
     {
 
-        public ScoreScene(GraphicsDevice graphicsDevice, GraphicsDeviceManager graphics)
+        public ScoreScene(GraphicsDevice graphicsDevice, GraphicsDeviceManager graphics, Controls.ControlManager controlManager)
         {
-            this.Initialize(graphicsDevice, graphics);
+            this.Initialize(graphicsDevice, graphics, controlManager);
 
         }
 

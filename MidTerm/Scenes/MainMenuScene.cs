@@ -6,10 +6,9 @@ namespace Scenes
 {
     public class MainMenuScene : Scene
     {
-
-        public MainMenuScene(GraphicsDevice graphicsDevice, GraphicsDeviceManager graphics)
+        public MainMenuScene(GraphicsDevice graphicsDevice, GraphicsDeviceManager graphics, Controls.ControlManager controlManager)
         {
-            this.Initialize(graphicsDevice, graphics);
+            this.Initialize(graphicsDevice, graphics, controlManager);
 
         }
 

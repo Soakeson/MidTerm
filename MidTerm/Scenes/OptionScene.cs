@@ -7,9 +7,9 @@ namespace Scenes
     public class OptionScene : Scene
     {
 
-        public OptionScene(GraphicsDevice graphicsDevice, GraphicsDeviceManager graphics)
+        public OptionScene(GraphicsDevice graphicsDevice, GraphicsDeviceManager graphics, Controls.ControlManager controlManager)
         {
-            this.Initialize(graphicsDevice, graphics);
+            this.Initialize(graphicsDevice, graphics, controlManager);
 
         }
 
