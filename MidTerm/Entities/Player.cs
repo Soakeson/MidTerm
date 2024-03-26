@@ -13,7 +13,7 @@ namespace Entities
 
             player.Add(new Components.Renderable(texture, Color.White, Color.Black));
             player.Add(new Components.Positionable(pos));
-            player.Add(new Components.Movable(new Vector2(0, 0), new Vector2(.02f, .02f), DateTime.Now.TimeOfDay));
+            player.Add(new Components.Movable(new Vector2(0, 0), new Vector2(0, 0), DateTime.Now.TimeOfDay));
             Components.Movable movable = player.GetComponent<Components.Movable>();
             player.Add(new Components.KeyboardControllable(
                         cm,
@@ -23,25 +23,25 @@ namespace Entities
                          new Controls.ControlDelegate((GameTime gameTime, float value) =>
                          {
                             movable.facing = new Vector2(0, 1);
-                            movable.velocity += new Vector2(.05f, .05f);
+                            movable.velocity = new Vector2(.03f, .03f);
                          })),
                         (new Controls.Control(sc, Controls.ControlContext.MoveDown, Keys.S, false),
                          new Controls.ControlDelegate((GameTime gameTime, float value) =>
                          {
                             movable.facing = new Vector2(0, -1);
-                            movable.velocity += new Vector2(.05f, .05f);
+                            movable.velocity = new Vector2(.03f, .03f);
                          })),
                         (new Controls.Control(sc, Controls.ControlContext.MoveRight, Keys.D, false),
                          new Controls.ControlDelegate((GameTime gameTime, float value) =>
                          {
                             movable.facing = new Vector2(-1, 0);
-                            movable.velocity += new Vector2(.05f, .05f);
+                            movable.velocity = new Vector2(.03f, .03f);
                          })),
                         (new Controls.Control(sc, Controls.ControlContext.MoveLeft, Keys.A, false),
                          new Controls.ControlDelegate((GameTime gameTime, float value) =>
                          {
                             movable.facing = new Vector2(1, 0);
-                            movable.velocity += new Vector2(.05f, .05f);
+                            movable.velocity = new Vector2(.03f, .03f);
                          })),
                         }));
             return player;
