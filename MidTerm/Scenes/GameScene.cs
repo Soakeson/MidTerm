@@ -12,6 +12,7 @@ namespace Scenes
         private Renderer renderer;
         private KeyboardInput keyboardInput;
         private Movement movement;
+        private Collision collision;
 
         private List<Entity> removeThese = new List<Entity>();
         private List<Entity> addThese = new List<Entity>();
@@ -23,12 +24,14 @@ namespace Scenes
             this.keyboardInput = new Systems.KeyboardInput(controlManager, SceneContext.Game);
             this.movement = new Movement();
             this.renderer = new Renderer(spriteBatch);
+            this.collision = new Collision();
         }
 
         override public void LoadContent(ContentManager contentManager)
         {
             Texture2D playerTex = contentManager.Load<Texture2D>("Images/player");
             AddEntity(Player.Create(playerTex, controlManager, SceneContext.Game, new Vector2(0, 0)));
+            AddEntity(Wall.Create(playerTex, new Vector2(100, 100)));
         }
 
         override public SceneContext ProcessInput(GameTime gameTime)
@@ -44,6 +47,7 @@ namespace Scenes
         {
             keyboardInput.Update(gameTime);
             renderer.Update(gameTime);
+            collision.Update(gameTime);
             movement.Update(gameTime);
         }
 
@@ -51,6 +55,7 @@ namespace Scenes
         {
             renderer.Add(entity);
             keyboardInput.Add(entity);
+            collision.Add(entity);
             movement.Add(entity);
         }
 
@@ -58,6 +63,7 @@ namespace Scenes
         {
             renderer.Remove(entity.id);
             keyboardInput.Remove(entity.id);
+            collision.Remove(entity.id);
             movement.Remove(entity.id);
         }
 

@@ -5,9 +5,9 @@ namespace Components
 {
     class Renderable : Component
     {
-        public Texture2D texture;
-        public Color color;
-        public Color stroke;
+        public Texture2D texture {get; set;}
+        public Color color {get; set;}
+        public Color stroke {get; set;}
 
         public Renderable(Texture2D texture, Color color, Color stroke)
         {

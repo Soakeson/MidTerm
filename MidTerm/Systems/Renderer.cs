@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -17,6 +18,7 @@ namespace Systems
 
         public override void Update(GameTime gameTime)
         {
+            sb.GraphicsDevice.Clear(Color.Black);
             foreach (var entity in entities.Values)
             {
                 RenderEntity(entity);
@@ -27,7 +29,6 @@ namespace Systems
         {
             Components.Positionable positionable = entity.GetComponent<Components.Positionable>();
             Components.Renderable renderable = entity.GetComponent<Components.Renderable>();
-            sb.GraphicsDevice.Clear(Color.Black);
             sb.Begin();
             sb.Draw(
                     renderable.texture,

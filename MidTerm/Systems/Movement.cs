@@ -5,7 +5,7 @@ namespace Systems
 {
     /// <summary>
     /// This system is responsible for handling the movement of any
-    /// entity with a movable & position components.
+    /// entity with a Movable & Positionable components.
     /// </summary>
     class Movement : System
     {
@@ -34,6 +34,13 @@ namespace Systems
 
             Vector2 newPos = movable.facing * (movable.velocity * gameTime.ElapsedGameTime.Milliseconds) + positionable.pos;
             positionable.pos = newPos;
+
+            // If Collidable update the hitbox position
+            if (entity.ContainsComponent<Components.Collidable>())
+            {
+                Components.Collidable col = entity.GetComponent<Components.Collidable>();
+                col.hitBox = new Vector3(newPos.X, newPos.Y, col.hitBox.Z);
+            }
         }
     }
 }

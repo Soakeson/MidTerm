@@ -11,7 +11,9 @@ namespace Entities
         {
             Entity player = new Entity();
 
-            player.Add(new Components.Renderable(texture, Color.White, Color.Black));
+            int radius = texture.Width >= texture.Height ? texture.Width/2 : texture.Height/2;
+            player.Add(new Components.Collidable(new Vector3(pos.X, pos.Y, radius)));
+            player.Add(new Components.Renderable(texture, Color.Red, Color.Black));
             player.Add(new Components.Positionable(pos));
             player.Add(new Components.Movable(new Vector2(0, 0), new Vector2(0, 0)));
             Components.Movable movable = player.GetComponent<Components.Movable>();
