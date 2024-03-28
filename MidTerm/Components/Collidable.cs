@@ -11,6 +11,13 @@ namespace Components
             set { hitBox = value; }
         }
 
+        private bool collided { get; set; }
+        public bool Collided
+        {
+            get { return collided; }
+            set { collided = value; }
+        }
+
         public Collidable(Vector3 hitBox)
         {
             this.hitBox = hitBox;

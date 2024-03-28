@@ -4,11 +4,11 @@ namespace Components
 {
     public class Movable : Component
     {
-        private Vector2 facing { get; set; }
-        public Vector2 Facing
+        private Vector2 rotation { get; set; }
+        public Vector2 Rotation 
         {
-            get { return facing; }
-            set { facing = value; }
+            get { return rotation; }
+            set { rotation = value; }
         }
 
         private Vector2 velocity { get; set; }
@@ -18,9 +18,9 @@ namespace Components
             set { velocity = value; }
         }
 
-        public Movable(Vector2 facing, Vector2 velocity)
+        public Movable(Vector2 rotation, Vector2 velocity)
         {
-            this.facing = facing;
+            this.rotation = rotation;
             this.velocity = velocity;
         }
 

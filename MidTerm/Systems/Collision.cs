@@ -23,15 +23,14 @@ namespace Systems
             {
                 foreach (var e2 in entities.Values)
                 {
-                    if (e1 != e2)
+                    bool res = DidCollide(e1, e2);
+                    Components.Collidable e1Col = e1.GetComponent<Components.Collidable>();
+                    Components.Collidable e2Col = e2.GetComponent<Components.Collidable>();
+                    if (res != e1Col.Collided || res != e2Col.Collided)
                     {
-                        bool res = DidCollide(e1, e2);
-                        // If collided put it back in it's previous location
-                        if (res) 
-                        {
-                            Components.Positionable ep = e1.GetComponent<Components.Positionable>();
-                            ep.Pos = ep.PrevPos;
-                        }
+                        e1Col.Collided = res;
+                        e2Col.Collided = res;
+                        if (res) HandleCollision(e1, e2);
                     }
                 }
             }
@@ -39,6 +38,11 @@ namespace Systems
 
         private bool DidCollide(Entities.Entity e1, Entities.Entity e2)
         {
+            if (e1 == e2)
+            {
+                return false;
+            }
+
             Components.Collidable e1Col = e1.GetComponent<Components.Collidable>();
             Components.Collidable e2Col = e2.GetComponent<Components.Collidable>();
             double hitDist = Math.Pow(e1Col.HitBox.Z + e2Col.HitBox.Z, 2);
@@ -52,6 +56,27 @@ namespace Systems
             return false;
         }
 
-        
+        private void HandleCollision(Entities.Entity e1, Entities.Entity e2)
+        {
+            Components.Positionable e1Pos = e1.GetComponent<Components.Positionable>();
+            Components.Positionable e2Pos = e1.GetComponent<Components.Positionable>();
+            e1Pos.Pos = e1Pos.PrevPos;
+
+            //Movables - Non-Movables
+            if (e1.ContainsComponent<Components.Movable>() && !e2.ContainsComponent<Components.Movable>())
+            {
+                Components.Movable e1Mov = e1.GetComponent<Components.Movable>();
+                e1Mov.Velocity = -e1Mov.Velocity;
+            }
+
+            //Movables - Movables
+            if (e1.ContainsComponent<Components.Movable>() && e2.ContainsComponent<Components.Movable>())
+            {
+                Components.Movable e1Mov = e1.GetComponent<Components.Movable>();
+                Components.Movable e2Mov = e2.GetComponent<Components.Movable>();
+                e2Mov.Velocity = e1Mov.Velocity;
+                e1Mov.Velocity = -e1Mov.Velocity;
+            }
+        }
     }
 }

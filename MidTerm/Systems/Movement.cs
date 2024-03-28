@@ -30,10 +30,14 @@ namespace Systems
             Components.Movable movable = entity.GetComponent<Components.Movable>();
             Components.Positionable positionable = entity.GetComponent<Components.Positionable>();
 
-            movable.Velocity *= new Vector2(.85f, .85f);
+            // Cap velocity
+            if (Math.Abs(movable.Velocity.X) > 1) { movable.Velocity = new Vector2(movable.Velocity.X > 0 ? 1 : -1, movable.Velocity.Y); }
+            if (Math.Abs(movable.Velocity.Y) > 1) { movable.Velocity = new Vector2(movable.Velocity.X, movable.Velocity.Y > 0 ? 1 : -1); }
 
-            Vector2 newPos = movable.Facing * (movable.Velocity * gameTime.ElapsedGameTime.Milliseconds) + positionable.Pos;
+            Vector2 newPos = movable.Velocity * gameTime.ElapsedGameTime.Milliseconds + positionable.Pos;
             positionable.Pos = newPos;
+
+            movable.Velocity *= new Vector2(.85f, .85f);
 
             // If Collidable update the hitbox position
             if (entity.ContainsComponent<Components.Collidable>())
