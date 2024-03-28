@@ -25,21 +25,21 @@ namespace Systems
             }
         }
 
-        public void MoveEntity(Entities.Entity entity, GameTime gameTime)
+        private void MoveEntity(Entities.Entity entity, GameTime gameTime)
         {
             Components.Movable movable = entity.GetComponent<Components.Movable>();
             Components.Positionable positionable = entity.GetComponent<Components.Positionable>();
 
-            movable.velocity *= new Vector2(.85f, .85f);
+            movable.Velocity *= new Vector2(.85f, .85f);
 
-            Vector2 newPos = movable.facing * (movable.velocity * gameTime.ElapsedGameTime.Milliseconds) + positionable.pos;
-            positionable.pos = newPos;
+            Vector2 newPos = movable.Facing * (movable.Velocity * gameTime.ElapsedGameTime.Milliseconds) + positionable.Pos;
+            positionable.Pos = newPos;
 
             // If Collidable update the hitbox position
             if (entity.ContainsComponent<Components.Collidable>())
             {
                 Components.Collidable col = entity.GetComponent<Components.Collidable>();
-                col.hitBox = new Vector3(newPos.X, newPos.Y, col.hitBox.Z);
+                col.HitBox = new Vector3(newPos.X, newPos.Y, col.HitBox.Z);
             }
         }
     }

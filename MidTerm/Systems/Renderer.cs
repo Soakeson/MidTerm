@@ -31,12 +31,12 @@ namespace Systems
             Components.Renderable renderable = entity.GetComponent<Components.Renderable>();
             sb.Begin();
             sb.Draw(
-                    renderable.texture,
+                    renderable.Texture,
                     new Rectangle(
-                        (int)positionable.pos.X,
-                        (int)positionable.pos.Y,
-                        renderable.texture.Height,
-                        renderable.texture.Width
+                        (int)positionable.Pos.X,
+                        (int)positionable.Pos.Y,
+                        renderable.Texture.Height,
+                        renderable.Texture.Width
                         ),
                     renderable.color
                     );

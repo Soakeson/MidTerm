@@ -46,25 +46,25 @@ namespace Scenes
         override public void Update(GameTime gameTime)
         {
             keyboardInput.Update(gameTime);
-            renderer.Update(gameTime);
-            collision.Update(gameTime);
             movement.Update(gameTime);
+            collision.Update(gameTime);
+            renderer.Update(gameTime);
         }
 
         private void AddEntity(Entity entity)
         {
             renderer.Add(entity);
             keyboardInput.Add(entity);
-            collision.Add(entity);
             movement.Add(entity);
+            collision.Add(entity);
         }
 
         private void RemoveEntity(Entity entity)
         {
             renderer.Remove(entity.id);
             keyboardInput.Remove(entity.id);
-            collision.Remove(entity.id);
             movement.Remove(entity.id);
+            collision.Remove(entity.id);
         }
 
     }
