@@ -11,8 +11,8 @@ namespace Systems
     {
         public Movement()
             : base(
-                  typeof(Components.Movable),
-                  typeof(Components.Positionable)
+                    typeof(Components.Movable),
+                    typeof(Components.Positionable)
                   )
         {
         }
