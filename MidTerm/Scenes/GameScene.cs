@@ -13,6 +13,7 @@ namespace Scenes
         private KeyboardInput keyboardInput;
         private Movement movement;
         private Collision collision;
+        private Audio audio;
 
         private List<Entity> removeThese = new List<Entity>();
         private List<Entity> addThese = new List<Entity>();
@@ -25,6 +26,7 @@ namespace Scenes
             this.movement = new Movement();
             this.renderer = new Renderer(spriteBatch);
             this.collision = new Collision();
+            this.audio = new Audio();
         }
 
         override public void LoadContent(ContentManager contentManager)
@@ -49,6 +51,7 @@ namespace Scenes
             movement.Update(gameTime);
             collision.Update(gameTime);
             renderer.Update(gameTime);
+            audio.Update(gameTime);
         }
 
         private void AddEntity(Entity entity)
@@ -57,6 +60,7 @@ namespace Scenes
             keyboardInput.Add(entity);
             movement.Add(entity);
             collision.Add(entity);
+            audio.Add(entity);
         }
 
         private void RemoveEntity(Entity entity)
@@ -65,6 +69,7 @@ namespace Scenes
             keyboardInput.Remove(entity.id);
             movement.Remove(entity.id);
             collision.Remove(entity.id);
+            audio.Remove(entity.id);
         }
 
     }
