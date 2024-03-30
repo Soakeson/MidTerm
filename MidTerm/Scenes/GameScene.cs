@@ -1,9 +1,10 @@
+using Systems;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Audio;
 using Entities;
-using Systems;
 
 namespace Scenes
 {
@@ -32,7 +33,8 @@ namespace Scenes
         override public void LoadContent(ContentManager contentManager)
         {
             Texture2D playerTex = contentManager.Load<Texture2D>("Images/player");
-            AddEntity(Player.Create(playerTex, controlManager, SceneContext.Game, new Vector2(0, 0)));
+            SoundEffect playerSound = contentManager.Load<SoundEffect>("Audio/click");
+            AddEntity(Player.Create(playerTex, playerSound, controlManager, SceneContext.Game, new Vector2(0, 0)));
             AddEntity(Wall.Create(playerTex, new Vector2(100, 100)));
         }
 

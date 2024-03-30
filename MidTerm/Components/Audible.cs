@@ -21,7 +21,7 @@ namespace Components
             set { play = value; }
         }
 
-        public Audible()
+        public Audible(SoundEffect sound)
         {
             this.sound = sound;
             this.Play = false;

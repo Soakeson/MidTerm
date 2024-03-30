@@ -32,8 +32,7 @@ namespace Systems
             Components.Audible audible = entity.GetComponent<Components.Audible>();
             if (audible.Play)
             {
-                Console.WriteLine("BEEP");
-                // audible.Sound.Play();
+                audible.Sound.Play();
                 audible.Play = false;
             }
         }

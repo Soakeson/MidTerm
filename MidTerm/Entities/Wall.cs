@@ -10,9 +10,10 @@ namespace Entities
             Entity wall = new Entity();
             int radius = texture.Width >= texture.Height ? texture.Height/2 : texture.Width/2;
 
-            wall.Add(new Components.Collidable(new Vector3(pos.X, pos.Y, radius-30)));
+            wall.Add(new Components.Collidable(new Vector3(pos.X, pos.Y, radius-25)));
             wall.Add(new Components.Renderable(texture, Color.White, Color.Black));
             wall.Add(new Components.Positionable(pos));
+            // wall.Add(new Components.Movable(new Vector2(0, 0), new Vector2(0, 0)));
 
             return wall;
         }
