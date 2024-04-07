@@ -7,19 +7,13 @@ namespace Components
     /// </summary>
     public class Positionable : Component
     {
-        private Vector2 pos;
-        public Vector2 Pos
-        {
-            get { return pos; }
-            set { PrevPos = pos; pos = value; }
-        }
-
-        public Vector2 PrevPos { get; private set; }
+        public Vector2 pos { get; set; }
+        public Vector2 prevPos { get; set; }
 
         public Positionable(Vector2 pos)
         {
             this.pos = pos;
-            this.PrevPos = pos;
+            this.prevPos = pos;
         }
     }
 }

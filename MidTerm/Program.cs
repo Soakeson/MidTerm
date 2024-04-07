@@ -7,7 +7,7 @@ namespace Yew
         [STAThread]
         static void Main()
         {
-            using (var game = new MidTerm())
+            using (var game = new MidTerm.MidTerm())
             {
                 game.Run();
             }

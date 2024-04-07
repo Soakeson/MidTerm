@@ -9,7 +9,14 @@ namespace Controls
         MoveRight,
         MoveUp,
         MoveDown,
+        MoveTowards,
         MenuUp,
         MenuDown,
+        Confirm,
+        MouseClick,
+        MouseDown,
+        MouseUp,
+        MouseMove,
+        ToggleHand 
     }
 }
