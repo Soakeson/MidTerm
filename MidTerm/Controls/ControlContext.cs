@@ -17,6 +17,6 @@ namespace Controls
         MouseDown,
         MouseUp,
         MouseMove,
-        ToggleHand 
+        HandChange 
     }
 }

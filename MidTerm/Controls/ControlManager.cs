@@ -26,8 +26,8 @@ namespace Controls
         {
             controls.Add(ControlContext.MenuUp, new Control(ControlContext.MenuUp, Keys.W, true));
             controls.Add(ControlContext.MenuDown, new Control(ControlContext.MenuDown, Keys.S, true));
-            controls.Add(ControlContext.ToggleHand, new Control(ControlContext.ToggleHand, Keys.Space, true));
             controls.Add(ControlContext.Confirm, new Control(ControlContext.Confirm, Keys.Enter, true));
+            controls.Add(ControlContext.HandChange, new Control(ControlContext.HandChange, Keys.Space, true));
             SaveKeys();
         }
 

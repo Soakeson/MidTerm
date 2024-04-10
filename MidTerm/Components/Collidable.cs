@@ -9,10 +9,12 @@ namespace Components
     {
         public Vector3 hitBox { get; set; }
         public bool collided { get; set; }
+        public bool enabled { get; set; }
 
-        public Collidable(Vector3 hitBox)
+        public Collidable(Vector3 hitBox, bool enabled)
         {
             this.hitBox = hitBox;
+            this.enabled = enabled;
         }
     }
 }

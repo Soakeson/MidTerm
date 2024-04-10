@@ -34,7 +34,8 @@ namespace Scenes
             SoundEffect sound = contentManager.Load<SoundEffect>("Audio/click");
             AddEntity(MenuItem<SceneContext>.Create(font, SceneContext.Game, "main", true, new Vector2(50, 50), sound, Components.LinkPosition.Head, controlManager));
             AddEntity(MenuItem<SceneContext>.Create(font, SceneContext.Options, "main", false, new Vector2(50, 100), sound, Components.LinkPosition.Body, controlManager));
-            AddEntity(MenuItem<SceneContext>.Create(font, SceneContext.Exit, "main",  false, new Vector2(50, 150), sound, Components.LinkPosition.Tail, controlManager));
+            AddEntity(MenuItem<SceneContext>.Create(font, SceneContext.Credits, "main", false, new Vector2(50, 150), sound, Components.LinkPosition.Body, controlManager));
+            AddEntity(MenuItem<SceneContext>.Create(font, SceneContext.Exit, "main",  false, new Vector2(50, 200), sound, Components.LinkPosition.Tail, controlManager));
         }
 
         override public SceneContext ProcessInput(GameTime gameTime)

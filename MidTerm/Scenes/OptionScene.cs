@@ -34,7 +34,7 @@ namespace Scenes
             SpriteFont font = contentManager.Load<SpriteFont>("Fonts/Micro5-50");
             SoundEffect sound = contentManager.Load<SoundEffect>("Audio/click");
             AddEntity(MenuItem<Controls.Control>.Create(
-                        font, controlManager.GetControl(Controls.ControlContext.ToggleHand), 
+                        font, controlManager.GetControl(Controls.ControlContext.HandChange), 
                         "options", true, new Vector2(50, 50), sound, Components.LinkPosition.Head, controlManager));
         }
 

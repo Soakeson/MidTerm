@@ -59,10 +59,10 @@ namespace Systems
                     {
                         RenderText(entity);
                     }
-                    if (entity.ContainsComponent<Components.Collidable>())
-                    {
-                        RenderHitbox(entity);
-                    }
+                    // if (entity.ContainsComponent<Components.Collidable>())
+                    // {
+                    //     RenderHitbox(entity);
+                    // }
                 }
             }
         }
@@ -76,9 +76,9 @@ namespace Systems
                 sb.Draw(
                         renderable.texture,
                         new Rectangle(
-                            (int)(positionable.pos.X - renderable.texture.Width/2),
-                            (int)(positionable.pos.Y - renderable.texture.Height/2),
-                            renderable.height.HasValue ? (int)renderable.height : (int)(renderable.texture.Height),
+                            (int)(positionable.pos.X - (renderable.height.HasValue ? (int)renderable.height : renderable.texture.Height)/2),
+                            (int)(positionable.pos.Y - (renderable.width.HasValue ? (int)renderable.width : renderable.texture.Width)/2),
+                            renderable.height.HasValue ? (int)renderable.height : renderable.texture.Height,
                             renderable.width.HasValue ? (int)renderable.width : renderable.texture.Width
                             ),
                         renderable.color

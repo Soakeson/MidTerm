@@ -29,7 +29,9 @@ namespace Systems
                 {
                     Entities.Entity e2 = entityArr[j];
                     bool res = DidCollide(e1, e2);
-                    if (res) HandleCollision(e1, e2);
+                    if (e1.GetComponent<Components.Collidable>().enabled && e2.GetComponent<Components.Collidable>().enabled){
+                        if (res) HandleCollision(e1, e2);
+                    }
                 }
             }
         }
@@ -74,7 +76,7 @@ namespace Systems
             if (e1.ContainsComponent<Components.Movable>() && !e2.ContainsComponent<Components.Movable>())
             {
                 Components.Movable e1Mov = e1.GetComponent<Components.Movable>();
-                e1Mov.velocity += n;
+                e1Mov.velocity = new Vector2(0, 0);
             }
 
             // Movables - Movables
